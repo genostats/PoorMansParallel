@@ -1,7 +1,9 @@
 #include <thread>
+#include <vector>
+#include <Rcpp.h>
 
 #ifndef POOR_MANS_REDUCE
-#define POUR_MANS_REDUCE
+#define POOR_MANS_REDUCE
 
 
 namespace PoorMansReduce {
@@ -38,14 +40,9 @@ namespace PoorMansReduce {
     }
   } // fin private
 
-  // access to n
-  unsigned int nb_threads() {
-    return n;
-  }
-  
-  void set_nb_threads(unsigned int nb) {
-    n = nb;
-  } 
+  // access to n (defined in PoorMansReduce.cpp)
+  unsigned int nb_threads();
+  void set_nb_threads(unsigned int nb);
 
   // split function for class that inherit Worker
   template <typename Reducer>
@@ -84,7 +81,11 @@ namespace PoorMansReduce {
      delete red[i];
    }
  }
- 
+  // chink is ignored
+  template <typename Reducer>
+  void parallelReduce(size_t begin, size_t end, Reducer& A, int chunk) {
+    parallelReduce<Reducer>(begin, end, A);
+  }
 } // end namespace
  
 #endif
