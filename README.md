@@ -1,4 +1,4 @@
-# PoorMansReduce
+# Poor Man's Parallel 
 
 This is an experiment to understand multi threading in C++.
 
